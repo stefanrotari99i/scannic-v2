@@ -1,16 +1,12 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+import Layout from "@/components/layout-wrapper";
+import { Manrope } from "next/font/google";
+import type { Metadata } from "next";
+import { Providers } from "./providers";
+
+const manrope = Manrope({
+  subsets: ["latin-ext"],
 });
 
 export const metadata: Metadata = {
@@ -24,11 +20,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+    <html lang="en" className="light">
+      <body className={`${manrope.className}  antialiased`}>
+        <Providers>
+          <Layout>{children}</Layout>
+        </Providers>
       </body>
     </html>
   );
